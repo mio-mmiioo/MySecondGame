@@ -15,7 +15,7 @@ struct CONSTANT_BUFFER
 struct VERTEX
 {
 	XMVECTOR position;
-	XMVECTOR uv;
+	XMFLOAT2 uv;
 };
 
 class Quad

@@ -44,13 +44,14 @@ HRESULT Texture::Load(std::string fileName)
 	hr = Direct3D::pDevice->CreateSamplerState(&SamDesc, &pSampler_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, "Texture", "エラー", MB_OK);
+		MessageBox(nullptr, "Texture:サンプラーステートの作成に失敗しました", "エラー", MB_OK);
 		return S_FALSE;
 	}
 
 	//シェーダーリソースビュー
 	D3D11_SHADER_RESOURCE_VIEW_DESC srv = {};
-	srv.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	//srv.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	srv.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	srv.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 	srv.Texture2D.MipLevels = 1;
 	hr = CreateShaderResourceView(Direct3D::pDevice,image.GetImages(), image.GetImageCount(), metadata, &pSRV_);

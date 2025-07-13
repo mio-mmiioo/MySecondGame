@@ -13,17 +13,40 @@ Quad::~Quad()
 
 HRESULT  Quad::Initialize()
 {
+	//VERTEX vertices[] =
+	//{
+	//	{ XMVectorSet(-1.0f,  1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 0.0f) },   // 四角形の頂点（左上）
+	//	{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 0.0f) },   // 四角形の頂点（右上）
+	//	{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 1.0f) },   // 四角形の頂点（右下）
+	//	{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f) },   // 四角形の頂点（左下）
+	//};
+
+	// 1の目を表示する場合のUV座標 (画像が均等に分割されていると仮定)
 	VERTEX vertices[] =
 	{
-		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 0.0f),XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f) },   // 四角形の頂点（左上）
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f),	XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f) },   // 四角形の頂点（右上）
-		{ XMVectorSet(1.0f, -1.0f, 0.0f, 0.0f),	XMVectorSet(1.0f, 1.0f, 0.0f, 0.0f) },   // 四角形の頂点（右下）
-		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 0.0f),XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f) },   // 四角形の頂点（左下）
+		// 1の目
+		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 1.0f), XMFLOAT2(0.0f,    0.0f)     }, // 左上 (画像の左上)
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	 XMFLOAT2(1.0f / 4.0f, 0.0f)     }, // 右上 (画像の1/4の幅)
+		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	 XMFLOAT2(1.0f / 4.0f, 0.5f)     }, // 右下 (画像の1/4の幅, 半分の高さ)
+		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f), XMFLOAT2(0.0f,    0.5f)     }, // 左下 (画像の左端, 半分の高さ)
+
+		// 2の目
+		{ XMVectorSet(-1.0f,  1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,    0.0f)}, // 左上 (画像の左上)
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	 XMFLOAT2(1.0f / 2.0f, 0.0f)     }, // 右上 (画像の1/4の幅)
+		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	 XMFLOAT2(1.0f / 2.0f, 0.5f)     }, // 右下 (画像の1/4の幅, 半分の高さ)
+		{ XMVectorSet(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,    0.5f)     }, // 左下 (画像の左端, 半分の高さ)
+
+		// 3の目
+		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f / 2.0f,    0.0f)     }, // 左上 (画像の左上)
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	 XMFLOAT2(3.0f / 4.0f, 0.0f)     }, // 右上 (画像の1/4の幅)
+		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	 XMFLOAT2(3.0f / 4.0f, 0.5f)     }, // 右下 (画像の1/4の幅, 半分の高さ)
+		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f / 2.0f,    0.5f)     }, // 左下 (画像の左端, 半分の高さ)
+
 	};
 
 	// 頂点データ用バッファの設定
 	D3D11_BUFFER_DESC bd_vertex;
-	bd_vertex.ByteWidth = sizeof(VERTEX);
+	bd_vertex.ByteWidth = sizeof(vertices);
 	bd_vertex.Usage = D3D11_USAGE_DEFAULT;
 	bd_vertex.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd_vertex.CPUAccessFlags = 0;
@@ -38,7 +61,7 @@ HRESULT  Quad::Initialize()
 	}
 
 	//インデックス情報
-	int index[] = { 0,2,3, 0,1,2 };
+	int index[] = { 0,2,3, 0,1,2, 4,6,7, 4,5,6 };
 
 	// インデックスバッファを生成する
 	D3D11_BUFFER_DESC   bd;
@@ -73,10 +96,13 @@ HRESULT  Quad::Initialize()
 		return E_FAIL;
 	}
 
-	pTexture_ = new Texture;
+	pTexture_ = new Texture();
 	pTexture_->Load("Assets/dice.png");
-	assert(pTexture_->Load("Assets/dice.png") == S_OK);
-
+	if (FAILED(pTexture_->Load("Assets/dice.png")))
+	{
+		MessageBox(nullptr, "テクスチャのロードに失敗しました", "エラー", MB_OK);
+		return E_FAIL;
+	}
 	return S_OK;
 }
 
@@ -98,7 +124,8 @@ void Quad::Draw(XMMATRIX& worldMatrix)
 	Direct3D::pContext->Unmap(pConstantBuffer_, 0);	//再開
 
 	//頂点バッファ
-	UINT stride = sizeof(XMVECTOR);
+	//UINT stride = sizeof(XMVECTOR);
+	UINT stride = sizeof(VERTEX);//AIの予想
 	UINT offset = 0;
 	Direct3D::pContext->IASetVertexBuffers(0, 1, &pVertexBuffer_, &stride, &offset);
 
@@ -111,7 +138,7 @@ void Quad::Draw(XMMATRIX& worldMatrix)
 	Direct3D::pContext->VSSetConstantBuffers(0, 1, &pConstantBuffer_);	//頂点シェーダー用	
 	Direct3D::pContext->PSSetConstantBuffers(0, 1, &pConstantBuffer_);	//ピクセルシェーダー用
 
-	Direct3D::pContext->DrawIndexed(6, 0, 0);
+	Direct3D::pContext->DrawIndexed(12, 0, 0);
 }
 
 void Quad::Release()
