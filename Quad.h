@@ -20,6 +20,6 @@ public:
 	Quad();
 	~Quad();
 	HRESULT Initialize();
-	void Draw();
+	void Draw(XMMATRIX& worldMatrix);
 	void Release();
 };

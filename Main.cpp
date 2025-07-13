@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "Direct3D.h"
 #include "Quad.h"
+#include "Camera.h"
 
 //定数宣言
 const char* WIN_CLASS_NAME = "SampleGame";  //ウィンドウクラス名
@@ -59,6 +60,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		return 0;
 	}
 
+	Camera::Initialize();
+
 	Quad* quad = new Quad();
 	if (FAILED(quad->Initialize()))
 	{
@@ -81,10 +84,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		{
 			//ゲームの処理
 			
+			Camera::Update();
+
 			Direct3D::BeginDraw();
 
-
-			quad->Draw();
+			XMMATRIX mat = XMMatrixRotationY(XMConvertToRadians(45));
+			quad->Draw(mat);
 
 			//描画処理
 			Direct3D::EndDraw();
