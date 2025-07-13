@@ -69,8 +69,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		return 0;
 	}
 
-	float kari = 0;
-
+	float right = 0;
+	float up = 0;
 	//メッセージループ（何か起きるのを待つ）
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
@@ -86,17 +86,29 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		else
 		{
 			//ゲームの処理
-			//kari += 0.01f;
-			//if (kari >= 360)
-			//{
-			//	kari = 0;
-			//}
+			if (GetAsyncKeyState('A') & 0x8000)
+			{
+				right += 0.01f;
+				if (right >= 360)
+				{
+					right = 0;
+				}
+			}
+			if (GetAsyncKeyState('W') & 0x8000)
+			{
+				up += 0.01f;
+				if (up >= 360)
+				{
+					up = 0;
+				}
+			}
 
 			Camera::Update();
 
 			Direct3D::BeginDraw();
 
-			XMMATRIX mat = XMMatrixRotationY(XMConvertToRadians(kari));
+			XMMATRIX mat = XMMatrixRotationX(XMConvertToRadians(up)) * XMMatrixRotationY(XMConvertToRadians(right));
+			
 			dice->Draw(mat);
 
 			//描画処理
