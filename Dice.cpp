@@ -21,7 +21,7 @@ HRESULT  Dice::Initialize()
 	//	{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f) },   // 四角形の頂点（左下）
 	//};
 
-	// 1の目を表示する場合のUV座標 (画像が均等に分割されていると仮定) 今回ひどい書き方してるから
+	//今回ひどい書き方してるから
 	VERTEX vertices[] =
 	{
 		// 1の目 0-3
@@ -31,35 +31,34 @@ HRESULT  Dice::Initialize()
 		{ XMVectorSet(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f,			0.5f)}, // 左下 (画像の左端, 半分の高さ)
 
 		// 2の目 4-7
-		{ XMVectorSet(-1.0f,  1.0f, 1.0f, 1.0f),  XMFLOAT2(1.0f / 4.0f, 0.0f)}, // 左上 (画像の左上)
-		{ XMVectorSet(-1.0f,  1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 2.0f, 0.0f)}, // 右上 (画像の1/4の幅)
-		{ XMVectorSet(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 2.0f, 0.5f)}, // 右下 (画像の1/4の幅, 半分の高さ)
-		{ XMVectorSet(-1.0f, -1.0f, 1.0f, 1.0f),  XMFLOAT2(1.0f / 4.0f, 0.5f)}, // 左下 (画像の左端, 半分の高さ)
+		{ XMVectorSet(-1.0f,  1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f, 0.0f)},
+		{ XMVectorSet(-1.0f,  1.0f, 1.0f, 1.0f),  XMFLOAT2(1.0f / 2.0f, 0.0f)},
+		{ XMVectorSet(-1.0f, -1.0f, 1.0f, 1.0f),  XMFLOAT2(1.0f / 2.0f, 0.5f)},
+		{ XMVectorSet(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f, 0.5f)},
 
 		// 3の目 8-11
-		{ XMVectorSet(-1.0f,  1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 2.0f, 0.0f)}, // 左上 (画像の左上)
-		{ XMVectorSet(1.0f,  1.0f, -1.0f, 1.0f),	 XMFLOAT2(3.0f / 4.0f, 0.0f)}, // 右上 (画像の1/4の幅)
-		{ XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f),	 XMFLOAT2(3.0f / 4.0f, 0.5f)}, // 右下 (画像の1/4の幅, 半分の高さ)
-		{ XMVectorSet(-1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f / 2.0f, 0.5f)}, // 左下 (画像の左端, 半分の高さ)
+		{ XMVectorSet(1.0f,  1.0f, -1.0f, 1.0f),  XMFLOAT2(3.0f / 4.0f, 0.0f)},
+		{ XMVectorSet(-1.0f,  1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 2.0f, 0.0f)},
+		{ XMVectorSet(-1.0f, 1.0f, 1.0f, 1.0f),   XMFLOAT2(1.0f / 2.0f, 0.5f)},
+		{ XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f),	  XMFLOAT2(3.0f / 4.0f, 0.5f)},
 
-		//4の目 12-15
-		{ XMVectorSet(-1.0f,  -1.0f, 1.0f, 1.0f), XMFLOAT2(3.0f / 4.0f, 0.0f)}, // 左上 (画像の左上)
-		{ XMVectorSet(1.0f,  -1.0f, 1.0f, 1.0f),  XMFLOAT2(1.0f, 0.0f)}, // 右上 (画像の1/4の幅)
-		{ XMVectorSet(1.0f, -1.0f, -1.0f, 1.0f),  XMFLOAT2(1.0f, 0.5f)}, // 右下 (画像の1/4の幅, 半分の高さ)
-		{ XMVectorSet(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT2(3.0f / 4.0f, 0.5f)}, // 左下 (画像の左端, 半分の高さ)
+		// 4の目 12-15
+		{ XMVectorSet(1.0f,  -1.0f, 1.0f, 1.0f),  XMFLOAT2(1.0f,		0.0f)},
+		{ XMVectorSet(-1.0f,  -1.0f, 1.0f, 1.0f), XMFLOAT2(3.0f / 4.0f, 0.0f)},
+		{ XMVectorSet(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT2(3.0f / 4.0f, 0.5f)},
+		{ XMVectorSet(1.0f, -1.0f, -1.0f, 1.0f),  XMFLOAT2(1.0f,		0.5f)},
 
-		// 5の目 16-19
-		{ XMVectorSet(1.0f,  1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f,			0.5f)}, // 左上 (画像の左上)
-		{ XMVectorSet(1.0f,  1.0f, -1.0f, 1.0f),XMFLOAT2(1.0f / 4.0f,	0.5f)}, // 右上 (画像の1/4の幅)
-		{ XMVectorSet(1.0f, -1.0f, -1.0f, 1.0f),XMFLOAT2(1.0f / 4.0f,	1.0f)}, // 右下 (画像の1/4の幅, 半分の高さ)
-		{ XMVectorSet(1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f,			1.0f)}, // 左下 (画像の左端, 半分の高さ)
+		// 5の目 15-18
+		{ XMVectorSet(1.0f,  1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,	0.5f)},
+		{ XMVectorSet(1.0f,  1.0f, 1.0f, 1.0f),  XMFLOAT2(0.0f,			0.5f)},
+		{ XMVectorSet(1.0f, -1.0f, 1.0f, 1.0f),  XMFLOAT2(0.0f,			1.0f)},
+		{ XMVectorSet(1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,	1.0f)},
 
-		// 6の目 20-23
-		{ XMVectorSet(-1.0f,  1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,	0.5f)}, // 左上 (画像の左上)
-		{ XMVectorSet(1.0f,  1.0f, -1.0f, 1.0f),	 XMFLOAT2(1.0f / 2.0f,	0.5f)}, // 右上 (画像の1/4の幅)
-		{ XMVectorSet(1.0f, -1.0f, -1.0f, 1.0f),	 XMFLOAT2(1.0f / 2.0f,	1.0f)}, // 右下 (画像の1/4の幅, 半分の高さ)
-		{ XMVectorSet(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,	1.0f)}, // 左下 (画像の左端, 半分の高さ)
-
+		// 6の目 19-22
+		{ XMVectorSet(-1.0f,  1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,	0.5f)},
+		{ XMVectorSet(1.0f,  1.0f, -1.0f, 1.0f),  XMFLOAT2(1.0f / 2.0f,	0.5f)},
+		{ XMVectorSet(1.0f, -1.0f, -1.0f, 1.0f),  XMFLOAT2(1.0f / 2.0f,	1.0f)},
+		{ XMVectorSet(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,	1.0f)},
 	};
 
 	// 頂点データ用バッファの設定
@@ -78,8 +77,8 @@ HRESULT  Dice::Initialize()
 		return E_FAIL;
 	}
 
-	//インデックス情報
-	int index[] = { 0,3,2, 0,2,1, 4,5,6, 4,6,7, 8,10,11, 8,9,10, 12,14,15, 12,13,14, 16,18,19, 16,17,18, 20,22,23, 20,21,22 };
+	//インデックス情報 何とか書き直したい、、
+	int index[] = { 0,3,2, 0,2,1, 4,7,6, 4,6,5, 8,10,11, 8,9,10, 12,14,15, 12,13,14, 16,18,19, 16,17,18, 20,22,23, 20,21,22 };
 
 	// インデックスバッファを生成する
 	D3D11_BUFFER_DESC   bd;

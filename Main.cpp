@@ -87,7 +87,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		{
 			//ƒQ[ƒ€‚Ìˆ—
 			//kari += 0.01f;
-			//if (kari >= 180)
+			//if (kari >= 360)
 			//{
 			//	kari = 0;
 			//}
