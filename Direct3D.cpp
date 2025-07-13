@@ -1,5 +1,6 @@
 #include "Direct3D.h"
 #include <d3dcompiler.h>
+#include <DirectXMath.h>
 
 //定数宣言
 extern const int WINDOW_WIDTH = 800;  //ウィンドウの幅
@@ -114,6 +115,7 @@ HRESULT Direct3D::InitShader()
 	//頂点インプットレイアウト
 	D3D11_INPUT_ELEMENT_DESC layout[] = {
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },	//位置
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, sizeof(DirectX::XMVECTOR) , D3D11_INPUT_PER_VERTEX_DATA, 0 },//UV座標
 	};
 	if (FAILED(pDevice->CreateInputLayout(layout, 1, pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), &pVertexLayout)))
 	{
