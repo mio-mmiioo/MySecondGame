@@ -31,6 +31,7 @@ HRESULT Texture::Load(std::string fileName)
 
 	if (FAILED(hr))
 	{
+		MessageBox(nullptr, "Texture", "エラー", MB_OK);
 		return S_FALSE;
 	}
 
@@ -43,6 +44,7 @@ HRESULT Texture::Load(std::string fileName)
 	hr = Direct3D::pDevice->CreateSamplerState(&SamDesc, &pSampler_);
 	if (FAILED(hr))
 	{
+		MessageBox(nullptr, "Texture", "エラー", MB_OK);
 		return S_FALSE;
 	}
 
@@ -54,8 +56,11 @@ HRESULT Texture::Load(std::string fileName)
 	hr = CreateShaderResourceView(Direct3D::pDevice,image.GetImages(), image.GetImageCount(), metadata, &pSRV_);
 	if (FAILED(hr))
 	{
+		MessageBox(nullptr, "Texture:シェーダーリソースビュー", "エラー", MB_OK);
 		return S_FALSE;
 	}
+
+	return S_OK;
 }
 
 void Texture::Release()

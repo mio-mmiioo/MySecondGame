@@ -74,7 +74,8 @@ HRESULT  Quad::Initialize()
 	}
 
 	pTexture_ = new Texture;
-	pTexture_->Load("Assets\\dice.png");
+	pTexture_->Load("Assets/dice.png");
+	assert(pTexture_->Load("Assets/dice.png") == S_OK);
 
 	return S_OK;
 }
