@@ -13,35 +13,12 @@ Quad::~Quad()
 
 HRESULT  Quad::Initialize()
 {
-	//VERTEX vertices[] =
-	//{
-	//	{ XMVectorSet(-1.0f,  1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 0.0f) },   // 四角形の頂点（左上）
-	//	{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 0.0f) },   // 四角形の頂点（右上）
-	//	{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 1.0f) },   // 四角形の頂点（右下）
-	//	{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f) },   // 四角形の頂点（左下）
-	//};
-
-	// 1の目を表示する場合のUV座標 (画像が均等に分割されていると仮定)
 	VERTEX vertices[] =
 	{
-		// 1の目
-		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 1.0f), XMFLOAT2(0.0f,    0.0f)     }, // 左上 (画像の左上)
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	 XMFLOAT2(1.0f / 4.0f, 0.0f)     }, // 右上 (画像の1/4の幅)
-		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	 XMFLOAT2(1.0f / 4.0f, 0.5f)     }, // 右下 (画像の1/4の幅, 半分の高さ)
-		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f), XMFLOAT2(0.0f,    0.5f)     }, // 左下 (画像の左端, 半分の高さ)
-
-		// 2の目
-		{ XMVectorSet(-1.0f,  1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,    0.0f)}, // 左上 (画像の左上)
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	 XMFLOAT2(1.0f / 2.0f, 0.0f)     }, // 右上 (画像の1/4の幅)
-		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	 XMFLOAT2(1.0f / 2.0f, 0.5f)     }, // 右下 (画像の1/4の幅, 半分の高さ)
-		{ XMVectorSet(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f / 4.0f,    0.5f)     }, // 左下 (画像の左端, 半分の高さ)
-
-		// 3の目
-		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f / 2.0f,    0.0f)     }, // 左上 (画像の左上)
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	 XMFLOAT2(3.0f / 4.0f, 0.0f)     }, // 右上 (画像の1/4の幅)
-		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	 XMFLOAT2(3.0f / 4.0f, 0.5f)     }, // 右下 (画像の1/4の幅, 半分の高さ)
-		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f / 2.0f,    0.5f)     }, // 左下 (画像の左端, 半分の高さ)
-
+		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 0.0f) },   // 四角形の頂点（左上）
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 0.0f) },   // 四角形の頂点（右上）
+		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 1.0f) },   // 四角形の頂点（右下）
+		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f) },   // 四角形の頂点（左下）
 	};
 
 	// 頂点データ用バッファの設定
@@ -61,7 +38,7 @@ HRESULT  Quad::Initialize()
 	}
 
 	//インデックス情報
-	int index[] = { 0,2,3, 0,1,2, 4,6,7, 4,5,6 };
+	int index[] = { 0,2,3, 0,1,2 };
 
 	// インデックスバッファを生成する
 	D3D11_BUFFER_DESC   bd;

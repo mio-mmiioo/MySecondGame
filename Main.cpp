@@ -1,8 +1,8 @@
 //インクルード
 #include <Windows.h>
 #include "Direct3D.h"
-#include "Quad.h"
 #include "Camera.h"
+#include "Dice.h"
 
 //定数宣言
 const char* WIN_CLASS_NAME = "SampleGame";  //ウィンドウクラス名
@@ -62,11 +62,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	Camera::Initialize();
 
-	Quad* quad = new Quad();
-	if (FAILED(quad->Initialize()))
+	Dice* dice = new Dice();
+
+	if (FAILED(dice->Initialize()))
 	{
 		return 0;
 	}
+
+	float kari = 0;
 
 	//メッセージループ（何か起きるのを待つ）
 	MSG msg;
@@ -83,13 +86,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		else
 		{
 			//ゲームの処理
-			
+			//kari += 0.01f;
+			//if (kari >= 180)
+			//{
+			//	kari = 0;
+			//}
+
 			Camera::Update();
 
 			Direct3D::BeginDraw();
 
-			XMMATRIX mat = XMMatrixRotationY(XMConvertToRadians(0));
-			quad->Draw(mat);
+			XMMATRIX mat = XMMatrixRotationY(XMConvertToRadians(kari));
+			dice->Draw(mat);
 
 			//描画処理
 			Direct3D::EndDraw();
@@ -97,7 +105,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		}
 	}
 
-	SAFE_DELETE(quad);
+	SAFE_DELETE(dice);
 	Direct3D::Release();
 
 	return 0;
