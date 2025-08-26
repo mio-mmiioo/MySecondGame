@@ -19,6 +19,8 @@ HRESULT  Quad::Initialize()
 		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 0.0f) },   // 四角形の頂点（右上）
 		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 1.0f) },   // 四角形の頂点（右下）
 		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f) },   // 四角形の頂点（左下）
+		//{ XMVectorSet(-1.0f, 1.0f, -1.0f, 0.0f), XMVectorSet(0.0f,  0.0f, 0.0f, 0.0f), XMVectorSet(●,▲,■, 0.0f) },   // 四角形の頂点（左上）
+		//↑これで影つける
 	};
 
 	// 頂点データ用バッファの設定
@@ -89,6 +91,7 @@ void Quad::Draw(XMMATRIX& worldMatrix)
 	D3D11_MAPPED_SUBRESOURCE pdata;
 	CONSTANT_BUFFER cb;
 	cb.matWVP = XMMatrixTranspose(worldMatrix * Camera::GetViewMatrix() * Camera::GetProjectionMatrix());
+	//cb.matW = 
 
 	Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata);	// GPUからのデータアクセスを止める
 	memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));	// データを値を送る

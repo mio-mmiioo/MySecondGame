@@ -16,6 +16,7 @@ struct VERTEX
 {
 	XMVECTOR position;
 	XMFLOAT2 uv;
+	XMVECTOR normal;
 };
 
 class Dice
