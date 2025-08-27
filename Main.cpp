@@ -1,9 +1,13 @@
 //インクルード
-#include <Windows.h>
+//#include "framework.h"
+//#include "main.h"
+//#include <Windows.h>
 #include "Direct3D.h"
 #include "Camera.h"
 //#include "Dice.h"
 #include "Sprite.h"
+
+#define MAX_LOADSTRING 100
 
 //定数宣言
 const char* WIN_CLASS_NAME = "SampleGame";  //ウィンドウクラス名
