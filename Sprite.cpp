@@ -1,30 +1,29 @@
-#include "Quad.h"
+#include "Sprite.h"
 #include "Camera.h"
-Quad::Quad()
-	:pVertexBuffer_(nullptr),
+Sprite::Sprite()
+	: pVertexBuffer_(nullptr),
 	pIndexBuffer_(nullptr),
 	pConstantBuffer_(nullptr),
 	pTexture_(nullptr)
+
 {
 }
 
-Quad::~Quad()
+Sprite::~Sprite()
 {
 	SAFE_RELEASE(pConstantBuffer_);
 	SAFE_RELEASE(pIndexBuffer_);
 	SAFE_RELEASE(pVertexBuffer_);
 }
 
-HRESULT  Quad::Initialize()
+HRESULT  Sprite::Initialize()
 {
 	VERTEX vertices[] =
 	{
-		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 0.0f) },   // 四角形の頂点（左上）
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 0.0f) },   // 四角形の頂点（右上）
-		{ XMVectorSet(1.0f, -1.0f, 0.0f, 1.0f),	XMFLOAT2(1.0f, 1.0f) },   // 四角形の頂点（右下）
-		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f) },   // 四角形の頂点（左下）
-		//{ XMVectorSet(-1.0f, 1.0f, -1.0f, 0.0f), XMVectorSet(0.0f,  0.0f, 0.0f, 0.0f), XMVectorSet(●,▲,■, 0.0f) },   // 四角形の頂点（左上）
-		//↑これで影つける
+		{ XMFLOAT4(-1.0f,  1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) },   // 四角形の頂点（左上）
+		{ XMFLOAT4(1.0f,  1.0f, 0.0f, 0.0f), XMFLOAT2(1.0f, 0.0f) },   // 四角形の頂点（右上）
+		{ XMFLOAT4(1.0f, -1.0f, 0.0f, 0.0f), XMFLOAT2(1.0f, 1.0f) },   // 四角形の頂点（右下）
+		{ XMFLOAT4(-1.0f, -1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) },   // 四角形の頂点（左下）
 	};
 
 	// 頂点データ用バッファの設定
@@ -89,22 +88,22 @@ HRESULT  Quad::Initialize()
 	return S_OK;
 }
 
-void Quad::Draw(XMMATRIX& worldMatrix)
+void Sprite::Draw(XMMATRIX& worldMatrix)
 {
 	//コンスタントバッファに渡す情報
 	D3D11_MAPPED_SUBRESOURCE pdata;
 	CONSTANT_BUFFER cb;
-	cb.matWVP = XMMatrixTranspose(worldMatrix * Camera::GetViewMatrix() * Camera::GetProjectionMatrix());
-	//cb.matW = 
+	//cb.matW = XMMatrixTranspose(worldMatrix * Camera::GetViewMatrix() * Camera::GetProjectionMatrix());
+	cb.matW = XMMatrixTranspose(worldMatrix);
 
 	Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata);	// GPUからのデータアクセスを止める
 	memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));	// データを値を送る
-	
+
 	ID3D11SamplerState* pSampler = pTexture_->GetSampler();
 	Direct3D::pContext->PSSetSamplers(0, 1, &pSampler);
 	ID3D11ShaderResourceView* pSRV = pTexture_->GetSRV();
 	Direct3D::pContext->PSSetShaderResources(0, 1, &pSRV);
-	
+
 	Direct3D::pContext->Unmap(pConstantBuffer_, 0);	//再開
 
 	//頂点バッファ
@@ -125,7 +124,7 @@ void Quad::Draw(XMMATRIX& worldMatrix)
 	Direct3D::pContext->DrawIndexed(12, 0, 0);
 }
 
-void Quad::Release()
+void Sprite::Release()
 {
 	SAFE_RELEASE(pTexture_);
 	SAFE_DELETE(pTexture_);

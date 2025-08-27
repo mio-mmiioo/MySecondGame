@@ -2,7 +2,8 @@
 #include <Windows.h>
 #include "Direct3D.h"
 #include "Camera.h"
-#include "Dice.h"
+//#include "Dice.h"
+#include "Sprite.h"
 
 //定数宣言
 const char* WIN_CLASS_NAME = "SampleGame";  //ウィンドウクラス名
@@ -62,9 +63,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	Camera::Initialize();
 
-	Dice* dice = new Dice();
-
-	if (FAILED(dice->Initialize()))
+	//Dice* dice = new Dice();
+	Sprite* sprite = new Sprite();
+	if (FAILED(sprite->Initialize()))
 	{
 		return 0;
 	}
@@ -109,7 +110,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 			XMMATRIX mat = XMMatrixRotationX(XMConvertToRadians(up)) * XMMatrixRotationY(XMConvertToRadians(right));
 			
-			dice->Draw(mat);
+			sprite->Draw(mat);
 
 			//描画処理
 			Direct3D::EndDraw();
@@ -117,7 +118,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		}
 	}
 
-	SAFE_DELETE(dice);
+	SAFE_DELETE(sprite);
 	Direct3D::Release();
 
 	return 0;
