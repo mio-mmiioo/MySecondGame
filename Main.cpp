@@ -120,8 +120,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			Direct3D::BeginDraw();
 
 			//‚±‚±‚Åtransform•Ï‚¦‚é
-			transform.scale_.x = 0.5f;
-			
+			//transform.scale_.x = 0.5f;
+			transform.rotate_.y += 0.01f;
+			transform.rotate_.z += 0.01f;
 
 			XMMATRIX worldMatrix = transform.GetWorldMatrix();
 			//sprite->Draw(worldMatrix);
