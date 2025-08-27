@@ -1,5 +1,7 @@
 #include "Quad.h"
 #include "Camera.h"
+#include "Texture.h"
+
 Quad::Quad()
 	:pVertexBuffer_(nullptr),
 	pIndexBuffer_(nullptr),

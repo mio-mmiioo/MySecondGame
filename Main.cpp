@@ -4,8 +4,9 @@
 //#include <Windows.h>
 #include "Direct3D.h"
 #include "Camera.h"
-//#include "Dice.h"
-#include "Sprite.h"
+#include "Dice.h"
+//#include "Sprite.h"
+#include "Transform.h"
 
 #define MAX_LOADSTRING 100
 
@@ -67,12 +68,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	Camera::Initialize();
 
-	//Dice* dice = new Dice();
-	Sprite* sprite = new Sprite();
-	if (FAILED(sprite->Initialize()))
+	Dice* dice = new Dice();
+	//Sprite* sprite = new Sprite();
+	Transform transform;
+
+	if (FAILED(dice->Initialize()))
 	{
 		return 0;
 	}
+	//if (FAILED(sprite->Initialize()))
+	//{
+	//	return 0;
+	//}
 
 	float right = 0;
 	float up = 0;
@@ -112,9 +119,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 			Direct3D::BeginDraw();
 
-			XMMATRIX mat = XMMatrixRotationX(XMConvertToRadians(up)) * XMMatrixRotationY(XMConvertToRadians(right));
+			//Ç±Ç±Ç≈transformïœÇ¶ÇÈ
+			transform.scale_.x = 0.5f;
 			
-			sprite->Draw(mat);
+
+			XMMATRIX worldMatrix = transform.GetWorldMatrix();
+			//sprite->Draw(worldMatrix);
+			dice->Draw(worldMatrix);
 
 			//ï`âÊèàóù
 			Direct3D::EndDraw();
@@ -122,7 +133,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		}
 	}
 
-	SAFE_DELETE(sprite);
+	SAFE_DELETE(dice);
+	//SAFE_DELETE(sprite);
 	Direct3D::Release();
 
 	return 0;

@@ -1,6 +1,10 @@
 #include "Dice.h"
 #include "Camera.h"
+#include "Texture.h"
+#include <DirectXMath.h>
+
 Dice::Dice()
+	:Quad()
 {
 }
 
@@ -125,6 +129,7 @@ HRESULT  Dice::Initialize()
 
 void Dice::Draw(XMMATRIX& worldMatrix)
 {
+	Direct3D::SetShader(SHADER_TYPE::SHADER_3D);
 	//コンスタントバッファに渡す情報
 	D3D11_MAPPED_SUBRESOURCE pdata;
 	CONSTANT_BUFFER cb;

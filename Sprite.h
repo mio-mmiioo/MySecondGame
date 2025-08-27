@@ -1,7 +1,7 @@
 #pragma once
 #include "Direct3D.h"
 #include <DirectXMath.h>
-#include "Texture.h"
+//#include "Texture.h"
 
 using namespace DirectX;
 
@@ -18,6 +18,8 @@ struct VERTEX
 	XMFLOAT4 position;
 	XMFLOAT2 uv;
 };
+
+class Texture;
 
 class Sprite
 {

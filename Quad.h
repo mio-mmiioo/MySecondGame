@@ -1,7 +1,7 @@
 #pragma once
 #include "Direct3D.h"
 #include <DirectXMath.h>
-#include "Texture.h"
+//#include "Texture.h"
 
 using namespace DirectX;
 
@@ -19,6 +19,8 @@ struct VERTEX
 	XMFLOAT2 uv;
 	XMVECTOR normal;
 };
+
+class Texture;
 
 class Quad
 {
