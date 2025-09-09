@@ -4,9 +4,10 @@
 //#include <Windows.h>
 #include "Direct3D.h"
 #include "Camera.h"
-#include "Dice.h"
+//#include "Dice.h"
 //#include "Sprite.h"
 #include "Transform.h"
+#include "Fbx.h"
 
 #define MAX_LOADSTRING 100
 
@@ -68,14 +69,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	Camera::Initialize();
 
-	Dice* dice = new Dice();
+	//Dice* dice = new Dice();
 	//Sprite* sprite = new Sprite();
 	Transform transform;
-
-	if (FAILED(dice->Initialize()))
-	{
-		return 0;
-	}
+	Fbx* fbx = new Fbx();
+	fbx->Load("oden.fbx");
+	//if (FAILED(dice->Initialize()))
+	//{
+	//	return 0;
+	//}
 	//if (FAILED(sprite->Initialize()))
 	//{
 	//	return 0;
@@ -121,12 +123,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 			//Ç±Ç±Ç≈transformïœÇ¶ÇÈ
 			//transform.scale_.x = 0.5f;
-			transform.rotate_.y += 0.01f;
-			transform.rotate_.z += 0.01f;
+			//transform.rotate_.y += 0.01f;
+			//transform.rotate_.z += 0.01f;
 
-			XMMATRIX worldMatrix = transform.GetWorldMatrix();
+			//XMMATRIX worldMatrix = transform.GetWorldMatrix();
 			//sprite->Draw(worldMatrix);
-			dice->Draw(worldMatrix);
+			//dice->Draw(worldMatrix);
+
+			transform.position_.x = 1.0f;
+			transform.rotate_.z = 0.0f;
+			transform.Calculation();
+			// XMMATRIX Mtrs = trans.GetWorldMatrix();
+			 //sprite->Draw(Mtrs);
+			fbx->Draw(transform);
 
 			//ï`âÊèàóù
 			Direct3D::EndDraw();
@@ -134,7 +143,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		}
 	}
 
-	SAFE_DELETE(dice);
+	//SAFE_DELETE(dice);
 	//SAFE_DELETE(sprite);
 	Direct3D::Release();
 

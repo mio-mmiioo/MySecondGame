@@ -1,13 +1,14 @@
-#pragma once
+ï»¿#pragma once
 
 #include <d3d11.h>
 #include <fbxsdk.h>
 #include <string>
 #include "Transform.h"
 
-#pragma comment(lib, "LibFbxSDK-MT.lib")
-#pragma comment(lib, "LibXml2-MT.lib")
-#pragma comment(lib, "zlib-MT.lib")
+
+#pragma comment(lib, "LibFbxSDK-MD.lib")
+#pragma comment(lib, "LibXml2-MD.lib")
+#pragma comment(lib, "zlib-MD.lib")
 
 class Fbx
 {
@@ -16,18 +17,17 @@ class Fbx
 		XMMATRIX	matWVP;
 		XMMATRIX	matNormal;
 	};
-
 	struct VERTEX
 	{
 		XMVECTOR position;
 	};
 
-	int vertexCount_;	//’¸“_”
-	int polygonCount_;	//ƒ|ƒŠƒSƒ“”
+	ID3D11Buffer* pVertexBuffer_;
+	ID3D11Buffer* pIndexBuffer_;
+	ID3D11Buffer* pConstantBuffer_;
 
-	ID3D11Buffer* pVertexBuffer_;//’¸“_ƒoƒbƒtƒ@
-	ID3D11Buffer* pIndexBuffer_;//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-	ID3D11Buffer* pConstantBuffer_;//ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@
+	int vertexCount_;
+	int polygonCount_;
 
 public:
 
@@ -35,4 +35,49 @@ public:
 	HRESULT Load(std::string fileName);
 	void    Draw(Transform& transform);
 	void    Release();
+
+	void InitVertex(FbxMesh* mesh);
+	void InitIndex(FbxMesh* mesh);
+	void InitConstantBuffer();
 };
+
+//#pragma once
+//
+//#include <d3d11.h>
+//#include <fbxsdk.h>
+//#include <string>
+//#include "Transform.h"
+//
+//#pragma comment(lib, "LibFbxSDK-MT.lib")
+//#pragma comment(lib, "LibXml2-MT.lib")
+//#pragma comment(lib, "zlib-MT.lib")
+//
+//class Fbx
+//{
+//	struct CONSTANT_BUFFER
+//	{
+//		XMMATRIX	matWVP;
+//		XMMATRIX	matNormal;
+//	};
+//
+//	struct VERTEX
+//	{
+//		XMVECTOR position;
+//	};
+//
+//	int vertexCount_;	//é ‚ç‚¹æ•°
+//	int polygonCount_;	//ãƒãƒªã‚´ãƒ³æ•°
+//
+//	ID3D11Buffer* pVertexBuffer_;//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+//	ID3D11Buffer* pIndexBuffer_;//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+//	ID3D11Buffer* pConstantBuffer_;//ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
+//
+//public:
+//
+//	Fbx();
+//	HRESULT Load(std::string fileName);
+//	void Draw(Transform& transform);
+//	void Release();
+//	void InitVertex(fbxsdk::FbxMesh* mesh);
+//	void InitIndex(fbxsdk::FbxMesh* mesh);
+//};
