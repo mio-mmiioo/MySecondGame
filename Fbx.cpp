@@ -12,6 +12,7 @@ Fbx::Fbx()
 	, pConstantBuffer_(nullptr)
 	, vertexCount_(0)
 	, polygonCount_(0)
+	, materialCount_(0)
 {
 }
 
@@ -116,18 +117,6 @@ void Fbx::Draw(Transform& transform)
 
 		//•`‰æ
 		Direct3D::pContext->DrawIndexed(indexCount_[i], 0, 0);
-
-		if (pMaterialList_[i].pTexture)
-		{
-			ID3D11SamplerState* pSampler = pMaterialList_[i].pTexture->GetSampler();
-			Direct3D::pContext->PSSetSamplers(0, 1, &pSampler);
-
-			ID3D11ShaderResourceView* pSRV = pMaterialList_[i].pTexture->GetSRV();
-			Direct3D::pContext->PSSetShaderResources(0, 1, &pSRV);
-		}
-
-		//•`‰æ
-		Direct3D::pContext->DrawIndexed(polygonCount_ * 3, 0, 0);
 	}
 }
 
