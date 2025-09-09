@@ -130,9 +130,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			//sprite->Draw(worldMatrix);
 			//dice->Draw(worldMatrix);
 
-			/*transform.position_.x = 1.0f;
-			transform.rotate_.y += 0.01f;
-			transform.Calculation();*/
+			//transform.position_.x = 1.0f;
+			//transform.rotate_.y += 0.01f;
+			//transform.Calculation();
+			
 			// XMMATRIX Mtrs = trans.GetWorldMatrix();
 			//sprite->Draw(Mtrs);
 			fbx->Draw(transform);

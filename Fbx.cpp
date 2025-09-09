@@ -213,8 +213,6 @@ void Fbx::InitIndex(FbxMesh* mesh)
 
 		indexCount_[i] = count;
 
-		//自力でどうぞ
-		//	（ここもデータサイズを指定するところだけ注意）
 		D3D11_BUFFER_DESC   bd;
 		bd.Usage = D3D11_USAGE_DEFAULT;
 		bd.ByteWidth = sizeof(int) * polygonCount_ * 3;
@@ -264,7 +262,7 @@ void Fbx::InitMaterial(fbxsdk::FbxNode* pNode)
 	{
 		FbxSurfaceMaterial* pMaterial = pNode->GetMaterial(i);//i番目のマテリアル情報を取得
 		FbxProperty  lProperty = pMaterial->FindProperty(FbxSurfaceMaterial::sDiffuse);//テクスチャ情報
-		int fileTextureCount = lProperty.GetSrcObjectCount<FbxFileTexture>();//テクスチャの数数
+		int fileTextureCount = lProperty.GetSrcObjectCount<FbxFileTexture>();//テクスチャの数
 
 		//テクスチャあり
 		if (fileTextureCount > 0)

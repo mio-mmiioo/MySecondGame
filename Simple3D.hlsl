@@ -66,7 +66,7 @@ float4 PS(VS_OUT inData) : SV_Target
     }
     else
     {
-        color = float4(1, 1, 1, 1);
+        color = float4(inData.color * diffuseColor);
 
     }
     //float4 ret = float4(inData.uv.x, inData.uv.y, 0, 1);
