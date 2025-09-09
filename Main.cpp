@@ -71,7 +71,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	//Dice* dice = new Dice();
 	//Sprite* sprite = new Sprite();
-	Transform transform;
+	static Transform transform;
 	Fbx* fbx = new Fbx();
 	fbx->Load("oden.fbx");
 	//if (FAILED(dice->Initialize()))
@@ -130,11 +130,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			//sprite->Draw(worldMatrix);
 			//dice->Draw(worldMatrix);
 
-			transform.position_.x = 1.0f;
-			transform.rotate_.z = 0.0f;
-			transform.Calculation();
+			/*transform.position_.x = 1.0f;
+			transform.rotate_.y += 0.01f;
+			transform.Calculation();*/
 			// XMMATRIX Mtrs = trans.GetWorldMatrix();
-			 //sprite->Draw(Mtrs);
+			//sprite->Draw(Mtrs);
 			fbx->Draw(transform);
 
 			//•`‰æˆ—
