@@ -3,6 +3,7 @@
 //#include "main.h"
 //#include <Windows.h>
 #include "Direct3D.h"
+#include "Input.h"
 #include "Camera.h"
 //#include "Dice.h"
 //#include "Sprite.h"
@@ -67,6 +68,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		return 0;
 	}
 
+	//DiewctInput‚Ì‰Šú‰»
+	Input::Initialize(hWnd);
+
 	Camera::Initialize();
 
 	//Dice* dice = new Dice();
@@ -100,6 +104,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		else
 		{
 			//ƒQ[ƒ€‚Ìˆ—
+
+			//“ü—Íî•ñ‚ÌXV
+			Input::Update();
+
+			if (Input::IsKey(DIK_ESCAPE))
+			{
+				PostQuitMessage(0);
+			}
+
 			if (GetAsyncKeyState('A') & 0x8000)
 			{
 				right += 0.01f;
@@ -146,6 +159,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	//SAFE_DELETE(dice);
 	//SAFE_DELETE(sprite);
+	Input::Release();
 	Direct3D::Release();
 
 	return 0;

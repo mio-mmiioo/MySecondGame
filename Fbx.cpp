@@ -279,10 +279,15 @@ void Fbx::InitMaterial(fbxsdk::FbxNode* pNode)
 		{
 			//テスクチャないときの処理
 			pMaterialList_[i].pTexture = nullptr;
+			
 			//マテリアルの色 　Lambert：拡散反射と、アンビエントのみのシェーディングモデル
-			FbxDouble3 color = ((FbxSurfaceLambert*)pMaterial)->Diffuse.Get();
-			pMaterialList_[i].diffuse = { (float)color[0], (float)color[1], (float)color[2], 1.0f };
-			//pMaterialList_[i].diffuse = XMFLOAT4((float)color[0], (float)color[1], (float)color[2], 1.0f);
+			//FbxDouble3 color = ((FbxSurfaceLambert*)pMaterial)->Diffuse.Get();
+			//pMaterialList_[i].diffuse = { (float)color[0], (float)color[1], (float)color[2], 1.0f };
+			////pMaterialList_[i].diffuse = XMFLOAT4((float)color[0], (float)color[1], (float)color[2], 1.0f);
+
+			FbxSurfaceLambert* pMaterial = (FbxSurfaceLambert*)pNode->GetMaterial(i);
+			FbxDouble3  diffuse = pMaterial->Diffuse;
+			pMaterialList_[i].diffuse = XMFLOAT4((float)diffuse[0], (float)diffuse[1], (float)diffuse[2], 1.0f);
 		}
 
 	}
