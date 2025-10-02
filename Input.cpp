@@ -1,7 +1,5 @@
 #include "Input.h"
-#include <DirectXMath.h>
-
-using namespace DirectX;
+//#include <DirectXMath.h>
 
 namespace Input
 {
@@ -9,6 +7,8 @@ namespace Input
 	LPDIRECTINPUTDEVICE8 pKeyDevice = nullptr; // デバイスオブジェクト
 	BYTE keyState[256] = { 0 }; // 現在の各キーの状態
 	BYTE prevKeyState[256];     //前フレームでの各キーの状態
+	DIMOUSESTATE mouseState; // マウスの状態
+	DIMOUSESTATE prevMouseState; // 前回のマウスの状態
 	XMVECTOR mousePosition; // マウスカーソルの位置を入れておく変数
 
 	void Initialize(HWND hWnd)
@@ -45,7 +45,8 @@ namespace Input
 	bool IsKeyDown(int keyCode)
 	{
 		//今は押してて、前回は押してない
-		if ((keyState[keyCode] ^ prevKeyState[keyCode]) & keyState[keyCode])
+		if ((keyState[keyCode] ^ prevKeyState[keyCode]) && keyState[keyCode])
+		//if (IsKey(keyCode) && !(prevKeyState[keyCode] & 0x80))
 		{
 			return true;
 		}
@@ -55,7 +56,8 @@ namespace Input
 	bool IsKeyUp(int keyCode)
 	{
 		//今は離してて、前回は押してる
-		if ((keyState[keyCode] ^ prevKeyState[keyCode]) & prevKeyState[keyCode])
+		if ((keyState[keyCode] ^ prevKeyState[keyCode]) && prevKeyState[keyCode])
+		//if (!IsKeey(KeyCode) && (prevKyState[keyCode] & 0x80)
 		{
 			return true;
 		}

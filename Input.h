@@ -7,6 +7,8 @@
 
 #define SAFE_RELEASE(p) if(p != nullptr){ p->Release(); p = nullptr;}
 
+using namespace DirectX;
+
 namespace Input
 {
 	void Initialize(HWND hWnd);
@@ -14,7 +16,7 @@ namespace Input
 	bool IsKey(int keyCode);
 	bool IsKeyDown(int keyCode);
 	bool IsKeyUp(int keyCode);
-	DirectX::XMVECTOR GetMousePosition();
+	XMVECTOR GetMousePosition();
 	void SetMousePosition(int x, int y);
 	void Release();
 };
