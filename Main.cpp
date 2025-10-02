@@ -174,6 +174,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
+	case WM_MOUSEMOVE: // マウスが動いたメッセージ
+		Input::SetMousePosition(LOWORD(lParam), HIWORD(lParam));
+		return 0;
+
 	case WM_DESTROY:
 		PostQuitMessage(0);  //プログラム終了
 		return 0;

@@ -1,4 +1,7 @@
 #include "Input.h"
+#include <DirectXMath.h>
+
+using namespace DirectX;
 
 namespace Input
 {
@@ -6,6 +9,7 @@ namespace Input
 	LPDIRECTINPUTDEVICE8 pKeyDevice = nullptr; // デバイスオブジェクト
 	BYTE keyState[256] = { 0 }; // 現在の各キーの状態
 	BYTE prevKeyState[256];     //前フレームでの各キーの状態
+	XMVECTOR mousePosition; // マウスカーソルの位置を入れておく変数
 
 	void Initialize(HWND hWnd)
 	{
@@ -56,6 +60,16 @@ namespace Input
 			return true;
 		}
 		return false;
+	}
+
+	XMVECTOR GetMousePosition()
+	{
+		return mousePosition;
+	}
+
+	void SetMousePosition(int x, int y)
+	{
+		mousePosition = XMVectorSet((float)x, (float)y, 0, 0);
 	}
 
 	void Release()
