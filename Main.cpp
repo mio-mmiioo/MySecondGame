@@ -104,13 +104,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		else
 		{
 			//ƒQ[ƒ€‚Ìˆ—
-
+			Camera::Update();
 			//“ü—Íî•ñ‚ÌXV
 			Input::Update();
 
-			if (Input::IsKey(DIK_ESCAPE))
+			if (Input::IsKeyDown(DIK_ESCAPE))
 			{
-				PostQuitMessage(0);
+				static int cnt = 0;
+				cnt++;
+				if (cnt >= 3)
+				{
+					PostQuitMessage(0);
+				}
 			}
 
 			if (GetAsyncKeyState('A') & 0x8000)
@@ -129,8 +134,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 					up = 0;
 				}
 			}
-
-			Camera::Update();
 
 			Direct3D::BeginDraw();
 
@@ -159,6 +162,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	//SAFE_DELETE(dice);
 	//SAFE_DELETE(sprite);
+	SAFE_DELETE(fbx);
 	Input::Release();
 	Direct3D::Release();
 
