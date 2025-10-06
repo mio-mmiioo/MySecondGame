@@ -108,7 +108,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			//“ü—Íî•ñ‚ÌXV
 			Input::Update();
 
-			if (Input::IsKeyUp(DIK_ESCAPE))
+			if (Input::IsButtonDown(1))
 			{
 				static int cnt = 0;
 				cnt++;
