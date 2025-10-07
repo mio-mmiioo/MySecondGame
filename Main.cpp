@@ -2,13 +2,13 @@
 //#include "framework.h"
 //#include "main.h"
 //#include <Windows.h>
-#include "Direct3D.h"
-#include "Input.h"
-#include "Camera.h"
+#include "Engine/Direct3D.h"
+#include "Engine/Input.h"
+#include "Engine/Camera.h"
 //#include "Dice.h"
 //#include "Sprite.h"
-#include "Transform.h"
-#include "Fbx.h"
+#include "Engine/Transform.h"
+#include "Engine/Fbx.h"
 
 #define MAX_LOADSTRING 100
 
