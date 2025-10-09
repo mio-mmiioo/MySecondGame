@@ -1,6 +1,8 @@
 #include "PlayScene.h"
+#include "Player.h"
 
 PlayScene::PlayScene(GameObject* parent)
+	:GameObject(parent, "PlayScene")
 {
 }
 
@@ -10,6 +12,10 @@ PlayScene::~PlayScene()
 
 void PlayScene::Initialize()
 {
+	// Playerのインスタンスを生成して、子オブジェクトに追加する
+	Player* pPlayer = new Player(this);
+	pPlayer->Initialize();
+	childList_.push_back(pPlayer);
 }
 
 void PlayScene::Update()
