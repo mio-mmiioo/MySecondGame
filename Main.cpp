@@ -1,14 +1,11 @@
 //インクルード
 //#include "framework.h"
 //#include "main.h"
-//#include <Windows.h>
 #include "Engine/Direct3D.h"
 #include "Engine/Input.h"
 #include "Engine/Camera.h"
-//#include "Dice.h"
-//#include "Sprite.h"
 #include "Engine/Transform.h"
-#include "Engine/Fbx.h"
+#include "Engine/RootJob.h"
 
 #define MAX_LOADSTRING 100
 
@@ -16,6 +13,8 @@
 const char* WIN_CLASS_NAME = "SampleGame";  //ウィンドウクラス名
 const int WINDOW_WIDTH = 800;  //ウィンドウの幅
 const int WINDOW_HEIGHT = 600; //ウィンドウの高さB
+
+RootJob* pRootJob = nullptr;
 
 //プロトタイプ宣言
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -73,19 +72,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	Camera::Initialize();
 
-	//Dice* dice = new Dice();
-	//Sprite* sprite = new Sprite();
-	static Transform transform;
-	Fbx* fbx = new Fbx();
-	fbx->Load("oden.fbx");
-	//if (FAILED(dice->Initialize()))
-	//{
-	//	return 0;
-	//}
-	//if (FAILED(sprite->Initialize()))
-	//{
-	//	return 0;
-	//}
+	pRootJob = new RootJob(nullptr);
+	pRootJob->Initialize();
+
+	//static Transform transform;
 
 	float right = 0;
 	float up = 0;
@@ -108,61 +98,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			//入力情報の更新
 			Input::Update();
 
-			if (Input::IsButtonDown(1))
+			if (Input::IsKeyDown(DIK_ESCAPE))
 			{
-				static int cnt = 0;
-				cnt++;
-				if (cnt >= 3)
-				{
-					PostQuitMessage(0);
-				}
-			}
-
-			if (GetAsyncKeyState('A') & 0x8000)
-			{
-				right += 0.01f;
-				if (right >= 360)
-				{
-					right = 0;
-				}
-			}
-			if (GetAsyncKeyState('W') & 0x8000)
-			{
-				up += 0.01f;
-				if (up >= 360)
-				{
-					up = 0;
-				}
+				PostQuitMessage(0);
 			}
 
 			Direct3D::BeginDraw();
 
-			//ここでtransform変える
-			//transform.scale_.x = 0.5f;
-			//transform.rotate_.y += 0.01f;
-			//transform.rotate_.z += 0.01f;
+			// pRootJobから、すべてのオブジェクトの描画をする
 
-			//XMMATRIX worldMatrix = transform.GetWorldMatrix();
-			//sprite->Draw(worldMatrix);
-			//dice->Draw(worldMatrix);
-
-			//transform.position_.x = 1.0f;
-			//transform.rotate_.y += 0.01f;
-			//transform.Calculation();
-			
-			// XMMATRIX Mtrs = trans.GetWorldMatrix();
-			//sprite->Draw(Mtrs);
-			fbx->Draw(transform);
-
-			//描画処理
 			Direct3D::EndDraw();
-
 		}
 	}
 
-	//SAFE_DELETE(dice);
-	//SAFE_DELETE(sprite);
-	SAFE_DELETE(fbx);
 	Input::Release();
 	Direct3D::Release();
 
