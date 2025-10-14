@@ -1,11 +1,14 @@
 //インクルード
 //#include "framework.h"
 //#include "main.h"
+#include <stdlib.h>
 #include "Engine/Direct3D.h"
 #include "Engine/Input.h"
 #include "Engine/Camera.h"
 #include "Engine/Transform.h"
 #include "Engine/RootJob.h"
+
+#pragma comment(lib, "winmm.lib")
 
 #define MAX_LOADSTRING 100
 
@@ -93,6 +96,40 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		//メッセージなし
 		else
 		{
+			timeBeginPeriod(1);
+			static DWORD countFps = 0; // FPS計測用カウンタ
+			static DWORD startTime = timeGetTime(); // 初回の時間を保存
+			DWORD nowTime = timeGetTime(); // 現在の時間を取得
+			static DWORD lastUpdateTime = nowTime;
+			timeEndPeriod(1);
+
+			if (nowTime - startTime >= 1000)
+			{
+				char str[16];
+				wsprintf(str, "%u", countFps);
+				SetWindowText(hWnd, str);
+
+				countFps = 0;
+				startTime = nowTime;
+			}
+
+			if (nowTime - lastUpdateTime <= 1000.0f / 60)
+			{
+				continue;
+			}
+			lastUpdateTime = nowTime;
+
+			countFps++;
+
+			char str[16];
+			wsprintf(str, "%u", countFps);
+
+			//static long int cnt = 0;
+			//string str = "Sample Game cnt:" + std::to_string(cnt++);
+			SetWindowTextA(hWnd, str);
+
+			//startTime = nowTime;
+
 			//ゲームの処理
 			Camera::Update();
 			//入力情報の更新
