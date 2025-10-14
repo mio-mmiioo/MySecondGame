@@ -97,6 +97,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			Camera::Update();
 			//“ü—Íî•ñ‚ÌXV
 			Input::Update();
+			pRootJob->UpdateSub();
 
 			if (Input::IsKeyDown(DIK_ESCAPE))
 			{

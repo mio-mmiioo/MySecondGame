@@ -14,6 +14,19 @@ GameObject::~GameObject()
 {
 }
 
+void GameObject::Release()
+{
+}
+
+void GameObject::UpdateSub()
+{
+	Update();
+	for (auto child : childList_)
+	{
+		child->UpdateSub();
+	}
+}
+
 void GameObject::DrawSub()
 {
 	// ©g‚ğ•`‰æ

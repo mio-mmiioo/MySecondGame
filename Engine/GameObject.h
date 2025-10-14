@@ -18,6 +18,8 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	virtual void Release() = 0;
+	void UpdateSub();
+	void ReleaseSub();
 	void DrawSub(); // 子オブジェクトをすべて描画する
 	template<class T>
 	void Instantiate(GameObject* parent)
