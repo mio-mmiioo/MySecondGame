@@ -29,7 +29,12 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	transform_.rotate_.y += 0.05f;
+	transform_.rotate_.y += 0.05f; // フレームワークがない弊害起きてる
+
+	if (transform_.rotate_.y > 16.0f) // フレームワークがない弊害起きてる
+	{
+		KillMe();
+	}
 }
 
 void Player::Draw()
