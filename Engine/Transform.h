@@ -15,7 +15,7 @@ public:
 	XMFLOAT3 rotate_;	//向き
 	XMFLOAT3 scale_;	//拡大率
 
-	//Transform* pParent_;	//親オブジェクトの情報
+	Transform* pParent_;	//親オブジェクトの情報
 
 	//コンストラクタ
 	Transform();

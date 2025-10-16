@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Engine/Fbx.h"
+#include "ChildOden.h"
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), // ←ここで名前つけるのあまりよくない
@@ -18,6 +19,9 @@ void Player::Initialize()
 	transform_.scale_.x = 0.7f;
 	transform_.scale_.y = 0.7f;
 	transform_.scale_.z = 0.7f;
+
+	// 子オブジェクトにChildOdenを追加する
+	Instantiate<ChildOden>(this);
 }
 
 void Player::Update()

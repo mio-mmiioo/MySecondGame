@@ -22,11 +22,12 @@ public:
 	void ReleaseSub();
 	void DrawSub(); // 子オブジェクトをすべて描画する
 	template<class T>
-	void Instantiate(GameObject* parent)
+	GameObject* Instantiate(GameObject* parent)
 	{
 		T* obj = new T(parent);
 		obj->Initialize();
 		childList_.push_back(obj);
+		return obj;
 	}
 
 protected:
