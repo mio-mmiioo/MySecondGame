@@ -21,6 +21,10 @@ public:
 	void UpdateSub();
 	void ReleaseSub();
 	void DrawSub(); // 子オブジェクトをすべて描画する
+
+	void SetPosition(XMFLOAT3 position) { transform_.position_ = position; }
+	void SetPosition(float x, float y, float z) { transform_.position_.x = x, transform_.position_.y = y, transform_.position_.z = z; }
+
 	template<class T>
 	GameObject* Instantiate(GameObject* parent)
 	{

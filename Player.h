@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 
 class Fbx;
+class ChildOden;
 
 class Player : public GameObject
 {
@@ -15,4 +16,6 @@ public:
 	void Release() override;
 private:
 	Fbx* pFbx_;
+	ChildOden* pRChildOden_;
+	ChildOden* pLChildOden_;
 };

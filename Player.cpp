@@ -21,12 +21,15 @@ void Player::Initialize()
 	transform_.scale_.z = 0.7f;
 
 	// 子オブジェクトにChildOdenを追加する
-	Instantiate<ChildOden>(this);
+	pRChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
+	pLChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
+	pRChildOden_->SetPosition(2.0f, 1.0f, 0.0f);
+	pLChildOden_->SetPosition(-2.0f, 1.0f, 0.0f);
 }
 
 void Player::Update()
 {
-	transform_.rotate_.y += 0.1f;
+	transform_.rotate_.y += 0.05f;
 }
 
 void Player::Draw()
