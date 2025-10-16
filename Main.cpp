@@ -113,7 +113,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 				startTime = nowTime;
 			}
 
-			if (nowTime - lastUpdateTime <= 1000.0f / 60)
+			if ((nowTime - lastUpdateTime) <= 1000.0f / 60)
 			{
 				continue;
 			}
@@ -150,6 +150,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		}
 	}
 
+	pRootJob->ReleaseSub();
 	Input::Release();
 	Direct3D::Release();
 
