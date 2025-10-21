@@ -7,6 +7,7 @@
 #include "Engine/Camera.h"
 #include "Engine/Transform.h"
 #include "Engine/RootJob.h"
+#include "Engine/Model.h"
 
 #pragma comment(lib, "winmm.lib")
 
@@ -150,6 +151,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		}
 	}
 
+	Model::Release();
 	pRootJob->ReleaseSub();
 	Input::Release();
 	Direct3D::Release();

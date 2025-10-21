@@ -4,7 +4,8 @@
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), // ←ここで名前つけるのあまりよくない
-	pFbx_(nullptr)
+	pFbx_(nullptr),
+	hModel_(-1)
 {
 }
 
@@ -19,6 +20,7 @@ void Player::Initialize()
 	transform_.scale_.x = 0.7f;
 	transform_.scale_.y = 0.7f;
 	transform_.scale_.z = 0.7f;
+	hModel_ = Model::Load("oden.fbx");
 
 	// 子オブジェクトにChildOdenを追加する
 	pRChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
@@ -39,10 +41,12 @@ void Player::Update()
 
 void Player::Draw()
 {
-	if (pFbx_)
-	{
-		pFbx_->Draw(transform_);
-	}
+	//if (pFbx_)
+	//{
+	//	pFbx_->Draw(transform_);
+	//}
+	Model::SetTransform(hModel_, transform_);
+	Model::Draw(hModel_);
 }
 
 void Player::Release()

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/Model.h"
 
 class Fbx;
 
@@ -15,4 +16,5 @@ public:
 	void Release() override;
 private:
 	Fbx* pFbx_;
+	int hModel_; // ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
 };
