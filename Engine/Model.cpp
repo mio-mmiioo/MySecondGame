@@ -45,6 +45,7 @@ void Model::Release()
 	bool isReffered = false; // QÆ‚³‚ê‚Ä‚¢‚é‚©
 	for (int i = 0; i < modelList.size(); i++)
 	{
+		isReffered = false;
 		for (int j = i + 1; j < modelList.size(); j++)
 		{
 			if (modelList[i]->pFbx_ == modelList[j]->pFbx_)
