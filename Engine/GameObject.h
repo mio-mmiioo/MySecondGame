@@ -26,6 +26,10 @@ public:
 	void SetPosition(float x, float y, float z) { transform_.position_.x = x, transform_.position_.y = y, transform_.position_.z = z; }
 	void KillMe();
 
+	GameObject* GetRootJob(); 
+	GameObject* FindChildObject(const string& name);
+	GameObject* FindObjectByName(const string& name);
+
 	template<class T>
 	GameObject* Instantiate(GameObject* parent)
 	{
