@@ -2,6 +2,7 @@
 #include "Engine/Input.h"
 #include "Engine/GameObject.h"
 #include "Engine/SceneManager.h"
+#include "Enemy.h"
 
 TestScene::TestScene(GameObject* parent)
 	:GameObject(parent, "TestScene")
@@ -14,6 +15,7 @@ TestScene::~TestScene()
 
 void TestScene::Initialize()
 {
+	Instantiate<Enemy>(this);
 }
 
 void TestScene::Update()
@@ -22,7 +24,7 @@ void TestScene::Update()
 	{
 		//SceneManager* sceneManager = FindObject("SceneManager");
 		//sceneManager->ChangeScene(SCENE_ID_PLAY);
-		SceneManager::ChangeScene("SceneManager");
+		//SceneManager::ChangeScene("SceneManager");
 	}
 }
 
