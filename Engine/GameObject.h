@@ -28,7 +28,7 @@ public:
 
 	GameObject* GetRootJob(); 
 	GameObject* FindChildObject(const string& name);
-	GameObject* FindObjectByName(const string& name);
+	GameObject* FindObject(const string& name);
 
 	template<class T>
 	GameObject* Instantiate(GameObject* parent)

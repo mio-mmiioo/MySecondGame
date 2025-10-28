@@ -20,10 +20,10 @@ void TestScene::Update()
 {
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
-		//SceneManager::ChangeScene(SCENE_ID_PLAY);
-		FindObjectByName("SceneManager");
+		//SceneManager* sceneManager = FindObject("SceneManager");
+		//sceneManager->ChangeScene(SCENE_ID_PLAY);
+		SceneManager::ChangeScene("SceneManager");
 	}
-
 }
 
 void TestScene::Draw()
