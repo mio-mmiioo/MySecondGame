@@ -49,7 +49,15 @@ void SceneManager::Release()
 {
 }
 
-void SceneManager::ChangeScene(SCENE_ID nextScene)
+void SceneManager::ChangeScene(int sceneId)
 {
-	nextSceneID_ = nextScene;
+	switch (sceneId)
+	{
+	case 0:
+		nextSceneID_ = SCENE_ID_TEST;
+		break;
+	case 1:
+		nextSceneID_ = SCENE_ID_PLAY;
+		break;
+	}
 }

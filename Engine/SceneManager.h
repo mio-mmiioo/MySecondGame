@@ -20,5 +20,5 @@ public:
 	void Draw() override;
 	void Release() override;
 
-	void ChangeScene(SCENE_ID nextScene);
+	void ChangeScene(int sceneId) override;
 };

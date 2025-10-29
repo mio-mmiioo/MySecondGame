@@ -106,7 +106,11 @@ GameObject* GameObject::FindChildObject(const string& name)
 
 GameObject* GameObject::FindObject(const string& name)
 {
+	// AI‚É•·‚¢‚½•û
 	GameObject* rootJob = GetRootJob();
-	GameObject* result = rootJob->FindObject(name);
-	return result;
+	if (rootJob == nullptr)
+	{
+		return rootJob;
+	}
+	return rootJob->FindChildObject(name);
 }

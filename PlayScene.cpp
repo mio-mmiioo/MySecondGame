@@ -12,11 +12,6 @@ PlayScene::~PlayScene()
 
 void PlayScene::Initialize()
 {
-	// Playerのインスタンスを生成して、子オブジェクトに追加する
-	//Player* pPlayer = new Player(this);
-	//pPlayer->Initialize();
-	//childList_.push_back(pPlayer);
-
 	Instantiate<Player>(this);
 }
 

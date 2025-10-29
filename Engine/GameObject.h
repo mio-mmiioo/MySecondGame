@@ -39,6 +39,8 @@ public:
 		return obj;
 	}
 
+	virtual void ChangeScene(int sceneId) {}
+
 protected:
 	list<GameObject*> childList_;
 	Transform transform_;
