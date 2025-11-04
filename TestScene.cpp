@@ -22,8 +22,8 @@ void TestScene::Update()
 {
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
-		GameObject* sceneManager = GameObject::FindObject("SceneManager");
-		sceneManager->ChangeScene(1);
+		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+		pSceneManager->ChangeScene(SCENE_ID_PLAY);
 	}
 }
 
