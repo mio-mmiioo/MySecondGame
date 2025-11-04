@@ -2,11 +2,14 @@
 #include "Engine/Fbx.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
+#include "Player.h"
+#include "Engine/SphereCollider.h"
 
 Enemy::Enemy(GameObject* parent)
 	:GameObject(parent, "Enemy"), // ←ここで名前つけるのあまりよくない
 	pFbx_(nullptr),
-	hModel_(-1)
+	hModel_(-1),
+	pSphereCollider_(nullptr)
 {
 }
 
@@ -18,6 +21,9 @@ void Enemy::Initialize()
 {
 	pFbx_ = new Fbx();
 	pFbx_->Load("box.fbx");
+	pSphereCollider_ = new SphereCollider(50.0f);
+	AddCollider(pSphereCollider_);
+	transform_.position_.x = 5.0f;
 	transform_.scale_.x = 0.7f;
 	transform_.scale_.y = 0.7f;
 	transform_.scale_.z = 0.7f;
@@ -27,6 +33,16 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	transform_.rotate_.y += 0.05f;
+	transform_.position_.x += 0.05f;
+
+	Player* player = (Player*)FindObject("Player");
+	if (player == nullptr)
+	{
+
+	}
+
+	RoundRobin(player);
+
 	if (Input::IsKeyDown(DIK_K)) // フレームワークがない弊害起きてる
 	{
 		KillMe();

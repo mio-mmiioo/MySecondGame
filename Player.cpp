@@ -1,10 +1,12 @@
 #include "Player.h"
 #include "Engine/Fbx.h"
 #include "ChildOden.h"
+#include "Engine/SphereCollider.h"
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), // ©‚±‚±‚Å–¼‘O‚Â‚¯‚é‚Ì‚ ‚Ü‚è‚æ‚­‚È‚¢
 	pFbx_(nullptr),
+	pSphereCollider_(nullptr),
 	hModel_(-1)
 {
 }
@@ -17,6 +19,8 @@ void Player::Initialize()
 {
 	pFbx_ = new Fbx();
 	pFbx_->Load("oden.fbx");
+	pSphereCollider_ = new SphereCollider(50.0f);
+	AddCollider(pSphereCollider_);
 	transform_.scale_.x = 0.7f;
 	transform_.scale_.y = 0.7f;
 	transform_.scale_.z = 0.7f;

@@ -32,9 +32,9 @@ public:
 	GameObject* FindChildObject(const string& name);
 	GameObject* FindObject(const string& name);
 
-	void AddCollideer(SphereCollider* pCollider);
+	void AddCollider(SphereCollider* pCollider);
 	void Collision(GameObject* pTarget);
-	void RoundRabin(GameObject* pTarget);
+	void RoundRobin(GameObject* pTarget);
 
 	template<class T>
 	GameObject* Instantiate(GameObject* parent)

@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 
 class Fbx;
+class SphereCollider;
 
 class Enemy : public GameObject
 {
@@ -15,5 +16,6 @@ public:
 	void Release() override;
 private:
 	Fbx* pFbx_;
+	SphereCollider* pSphereCollider_;
 	int hModel_;
 };

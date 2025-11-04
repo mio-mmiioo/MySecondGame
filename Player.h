@@ -3,6 +3,7 @@
 
 class Fbx;
 class ChildOden;
+class SphereCollider;
 
 class Player : public GameObject
 {
@@ -16,6 +17,7 @@ public:
 	void Release() override;
 private:
 	Fbx* pFbx_;
+	SphereCollider* pSphereCollider_;
 	int hModel_;
 	ChildOden* pRChildOden_;
 	ChildOden* pLChildOden_;

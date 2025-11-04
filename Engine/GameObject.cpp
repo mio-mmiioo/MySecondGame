@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "SphereCollider.h"
+#include "MessageDispatcherApi.h"
 
 GameObject::GameObject()
 	:pParent_(nullptr),
@@ -116,4 +118,47 @@ GameObject* GameObject::FindObject(const string& name)
 		return rootJob;
 	}
 	return rootJob->FindChildObject(name);
+}
+
+void GameObject::AddCollider(SphereCollider* pCollider)
+{
+	pCollider_ = pCollider;
+}
+
+void GameObject::Collision(GameObject* pTarget)
+{
+	// this->pCollider_とpTarget->pCollider_がぶつかっているか否か
+	float thisR = this->pCollider_->GetRadius();
+	float tgtR = pTarget->pCollider_->GetRadius();
+	float thre = (thisR + tgtR) * (thisR + tgtR);
+	// 2つのコライダーの距離を計算する
+	XMFLOAT3 thisP = this->transform_.position_;
+	XMFLOAT3 tgtP = pTarget->transform_.position_;
+	float distance = (thisP.x - tgtP.x) * (thisP.x - tgtP.x) +
+		(thisP.y - tgtP.y) * (thisP.y - tgtP.y) +
+		(thisP.z - tgtP.z) * (thisP.z - tgtP.z);
+	// コライダー同士が交差していたら
+	if (distance <= thre) {
+		MessageBoxA(0, "ぶつかった", "collider", MB_OK);
+	}
+}
+
+void GameObject::RoundRobin(GameObject* pTarget)
+{
+	// 自分にコライダーがなかったらリターン
+	if (pCollider_ == nullptr)
+	{
+		return;
+	}
+	// 自分とターゲット自体のコライダーの当たり判定
+	if (pTarget->pCollider_ != nullptr)
+	{
+		Collision(pTarget);
+	}
+	// 再帰的な奴で、ターゲットの子オブジェクトを当たり判定してく
+
+	for (auto itr : pTarget->childList_)
+	{
+		RoundRobin(itr);
+	}
 }
