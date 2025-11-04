@@ -26,6 +26,9 @@ void GameObject::Release()
 void GameObject::UpdateSub()
 {
 	Update();
+
+	// RoundRobin(GetRootJob());
+
 	for (auto child : childList_)
 	{
 		child->UpdateSub();

@@ -7,6 +7,8 @@
 using std::string;
 using std::list;
 
+class SphereCollider;
+
 class GameObject
 {
 public:
@@ -30,6 +32,10 @@ public:
 	GameObject* FindChildObject(const string& name);
 	GameObject* FindObject(const string& name);
 
+	void AddCollideer(SphereCollider* pCollider);
+	void Collision(GameObject* pTarget);
+	void RoundRabin(GameObject* pTarget);
+
 	template<class T>
 	GameObject* Instantiate(GameObject* parent)
 	{
@@ -44,6 +50,7 @@ protected:
 	Transform transform_;
 	GameObject* pParent_;
 	std::string objectName_;
+	SphereCollider* pCollider_;
 
 private:
 	bool isDead_;
