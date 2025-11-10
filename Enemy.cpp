@@ -2,7 +2,6 @@
 #include "Engine/Fbx.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
-#include "Player.h"
 #include "Engine/SphereCollider.h"
 
 Enemy::Enemy(GameObject* parent)
@@ -24,7 +23,7 @@ void Enemy::Initialize()
 	pSphereCollider_ = new SphereCollider(0.5f);
 	AddCollider(pSphereCollider_);
 
-	transform_.position_.x = -15.0f;
+	transform_.position_.x = -5.0f;
 	transform_.scale_.x = 0.7f;
 	transform_.scale_.y = 0.7f;
 	transform_.scale_.z = 0.7f;
@@ -36,13 +35,14 @@ void Enemy::Update()
 	transform_.rotate_.y += 0.05f;
 	transform_.position_.x += 0.05f;
 
-	Player* player = (Player*)FindObject("Player");
-	if (player == nullptr)
+	if (Input::IsKeyDown(DIK_A))
 	{
-
+		transform_.position_.x -= 0.05f;
 	}
-
-	//RoundRobin(player);
+	else if (Input::IsKeyDown(DIK_D))
+	{
+		transform_.position_.x += 0.05f;
+	}
 
 	if (Input::IsKeyDown(DIK_K)) // フレームワークがない弊害起きてる
 	{

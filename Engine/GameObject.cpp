@@ -134,12 +134,16 @@ void GameObject::Collision(GameObject* pTarget)
 	// 2つのコライダーの距離を計算する
 	XMFLOAT3 thisP = this->transform_.position_;
 	XMFLOAT3 tgtP = pTarget->transform_.position_;
+	if (thisP.x == tgtP.x && thisP.y == tgtP.y && thisP.z == tgtP.z)
+	{
+		return;
+	}
 	float distance = (thisP.x - tgtP.x) * (thisP.x - tgtP.x) +
 		(thisP.y - tgtP.y) * (thisP.y - tgtP.y) +
 		(thisP.z - tgtP.z) * (thisP.z - tgtP.z);
 	// コライダー同士が交差していたら
 	if (distance <= thre) {
-		//MessageBoxA(0, "ぶつかった", "collider", MB_OK);
+		MessageBoxA(0, "ぶつかった", "collider", MB_OK);
 	}
 }
 

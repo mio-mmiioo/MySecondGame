@@ -15,6 +15,8 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
+	void OnCollision(GameObject* pTarger);
+
 private:
 	Fbx* pFbx_;
 	SphereCollider* pSphereCollider_;

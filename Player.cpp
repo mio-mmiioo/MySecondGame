@@ -22,26 +22,29 @@ void Player::Initialize()
 	pSphereCollider_ = new SphereCollider(0.5f);
 	AddCollider(pSphereCollider_);
 
+	transform_.position_ = { 1.0f, 0.0f, 0.0f };
 	transform_.scale_.x = 0.7f;
 	transform_.scale_.y = 0.7f;
 	transform_.scale_.z = 0.7f;
 	hModel_ = Model::Load("oden.fbx");
 
 	// 子オブジェクトにChildOdenを追加する
-	pRChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
+	/*pRChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
 	pLChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
 	pRChildOden_->SetPosition(2.0f, 1.0f, 0.0f);
-	pLChildOden_->SetPosition(-2.0f, 1.0f, 0.0f);
+	pLChildOden_->SetPosition(-2.0f, 1.0f, 0.0f);*/
 }
 
 void Player::Update()
 {
 	transform_.rotate_.y += 0.05f; // フレームワークがない弊害起きてる
 
-	if (transform_.rotate_.y > 16.0f) // フレームワークがない弊害起きてる
-	{
-		KillMe();
-	}
+	
+
+	//if (transform_.rotate_.y > 16.0f) // フレームワークがない弊害起きてる
+	//{
+	//	KillMe();
+	//}
 }
 
 void Player::Draw()
