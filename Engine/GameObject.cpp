@@ -29,7 +29,7 @@ void GameObject::UpdateSub()
 {
 	Update();
 
-	// RoundRobin(GetRootJob());
+	RoundRobin(GetRootJob());
 
 	for (auto child : childList_)
 	{
@@ -139,7 +139,7 @@ void GameObject::Collision(GameObject* pTarget)
 		(thisP.z - tgtP.z) * (thisP.z - tgtP.z);
 	// コライダー同士が交差していたら
 	if (distance <= thre) {
-		MessageBoxA(0, "ぶつかった", "collider", MB_OK);
+		//MessageBoxA(0, "ぶつかった", "collider", MB_OK);
 	}
 }
 

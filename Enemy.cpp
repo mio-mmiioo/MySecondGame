@@ -21,9 +21,10 @@ void Enemy::Initialize()
 {
 	pFbx_ = new Fbx();
 	pFbx_->Load("box.fbx");
-	pSphereCollider_ = new SphereCollider(50.0f);
+	pSphereCollider_ = new SphereCollider(0.5f);
 	AddCollider(pSphereCollider_);
-	transform_.position_.x = 5.0f;
+
+	transform_.position_.x = -15.0f;
 	transform_.scale_.x = 0.7f;
 	transform_.scale_.y = 0.7f;
 	transform_.scale_.z = 0.7f;
@@ -41,7 +42,7 @@ void Enemy::Update()
 
 	}
 
-	RoundRobin(player);
+	//RoundRobin(player);
 
 	if (Input::IsKeyDown(DIK_K)) // フレームワークがない弊害起きてる
 	{

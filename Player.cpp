@@ -19,8 +19,9 @@ void Player::Initialize()
 {
 	pFbx_ = new Fbx();
 	pFbx_->Load("oden.fbx");
-	pSphereCollider_ = new SphereCollider(50.0f);
+	pSphereCollider_ = new SphereCollider(0.5f);
 	AddCollider(pSphereCollider_);
+
 	transform_.scale_.x = 0.7f;
 	transform_.scale_.y = 0.7f;
 	transform_.scale_.z = 0.7f;
