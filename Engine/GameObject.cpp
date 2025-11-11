@@ -134,10 +134,6 @@ void GameObject::Collision(GameObject* pTarget)
 	// 2つのコライダーの距離を計算する
 	XMFLOAT3 thisP = this->transform_.position_;
 	XMFLOAT3 tgtP = pTarget->transform_.position_;
-	if (thisP.x == tgtP.x && thisP.y == tgtP.y && thisP.z == tgtP.z)
-	{
-		return;
-	}
 	float distance = (thisP.x - tgtP.x) * (thisP.x - tgtP.x) +
 		(thisP.y - tgtP.y) * (thisP.y - tgtP.y) +
 		(thisP.z - tgtP.z) * (thisP.z - tgtP.z);
@@ -149,6 +145,11 @@ void GameObject::Collision(GameObject* pTarget)
 
 void GameObject::RoundRobin(GameObject* pTarget)
 {
+	if (pTarget->pCollider_ == pCollider_)
+	{
+		return;
+	}
+
 	// 自分にコライダーがなかったらリターン
 	if (pCollider_ == nullptr)
 	{
